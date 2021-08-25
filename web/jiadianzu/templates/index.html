@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vuejs</title>
+    <script src="../static/lib/axios.min.js"></script>
+    <script src="../static/lib/vue.js"></script>
+
+    <script src="../static/lib/element.js"></script>
+    <link rel="stylesheet" href="../static/lib/element.css">
+    <link rel="stylesheet" href="../static/lib/style.css">
+
+
+</head>
+
+<body>
+
+    <div class="container" id="app">
+        <div >
+            <p class="ai-title">图 像 识 别</p>
+            <p class="ai-tips">识别类别： 空调, 照相机, 吊灯, 风扇, 榨汁机, 电饭煲, 插座, 扫地机器人, 抽油烟机，洗衣机</p>
+            <p class="ai-tips">尽量选择白色背景</p>
+        </div>
+
+        
+        <div class="ai-button">
+            <input type="file" ref="input" style="display: none;" id="saveImage" @change="fileChange"
+                multiple="multiple" accept="image/*">
+            <!-- <el-upload multiple action="" ref="upload" class="upload-demo" :auto-upload="false" :limit="10" :show-file-list="false"
+                :on-change="uploads" :file-list :auto-upload="false" :http-request="uploadFile"> </el-upload> -->
+            <el-button type="primary" class="pbutton" @click="uploadClick" >上传图片</el-button>
+            <el-button type="danger" class="dbutton" @click="imgGo" v-model="urlArrs" values="urlArrs">开始识别
+            </el-button>
+
+        </div>
+        <div class="ai-window">
+            <div class="main-left">
+                <el-row :gutter="20">
+                    <el-col :span="5" v-for="(item,index) in urlArrs" :key="item.url">
+                        <div class="imgdata">
+
+                            <img :src=item.url class="imgdata">
+                            <el-tag id="eltag" type="success" class="grid-content" v-text='item.label'>
+
+                            </el-tag>
+
+                        </div>
+
+                    </el-col>
+
+                </el-row>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app",
+            data: {               
+                urlArrs: [],                
+            },
+            methods: { 
+                uploadClick() {                   
+                    this.$refs['input'].click();
+                },
+                fileChange(e) {                    
+                    this.files = e.target.files;
+                    this.urlArrs=[]
+                    let _this = this;
+                    for (var i = 0; i < this.files.length; i++) {
+                        if (this.files.length <= 20) {
+                            _this.urlArrs.push({ url: window.URL.createObjectURL(_this.files[i]), label: '' })
+                        }
+                        else {
+                            alert('添加图片已达到上限(20张)');
+                            return;
+                        }
+                    }                 
+                },
+                imgGo(e) {
+                    this.explain = '识别中';
+
+                    let self = this;
+                    let param = new FormData();
+                    let x = document.getElementById('saveImage').files;
+                    for (var i = 0; i < x.length; i++) {
+                        param.append('file', x[i])
+                    }
+                    console.log(param.getAll('file'));
+                    let headers = {
+                        "Content-Type": "multipart/form-data"
+                    };
+                    axios.post('/upload/', param, { headers: headers }).then(function (res) {
+                        console.log(res.data);
+                        let data = res.data;
+                        // console.log(self.urlArrs[0])
+                        self.explain = "识别结果为:"
+                        for (var i = 0; i < data.length; i++)
+                            self.urlArrs[i].label = self.explain + data[i].label
+
+                    })
+                        .catch(function (error) {
+                            console.log(error);
+                        })
+                },
+                
+
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>

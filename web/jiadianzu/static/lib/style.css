@@ -1,0 +1,141 @@
+body{
+    min-height: 100vh;
+    /* background-color: #777; */
+    background-image: url(../img/bg1.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.el-row {
+   
+    margin-bottom: 10px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.el-tag{
+    font-size: 16px !important;
+    /* color: black !important; */
+    font-weight:500;
+
+}
+.el-row:last-child {
+    margin-bottom: 0;
+}
+.el-col {
+    
+    border-radius: 4px;
+    margin-top: 30px;
+}
+
+.grid-content {
+    
+    border-radius: 4px;
+    min-height: 36px;
+    display: flex;
+    text-align: left;
+    justify-content:center;
+    /* background-color: black; */
+    bottom: 5px;
+}
+
+.el-col-5 {
+    
+    width: 20%;
+    height: 250px;
+    /* background-color: w; */
+    /* margin: 2px; */
+    padding: 8px 5px 8px 5px;
+    border: 1px solid #777;
+    background-color:rgba(255, 255, 255, 0.8);
+}
+.imgdata{
+    
+    text-align: center;
+    max-width: 230px;
+    /* width: e-xpression(this.width>190?"190px":this.width); */
+    max-height: 190px;
+    /* background-color: white; */
+    /* height: e-xpression(this.height>190?"190px":this.height); */
+  
+}
+
+.container{
+    width: 1260px;
+	/* min-width: 720px; */
+	margin: 0 auto;
+    height: 100%;
+	
+}
+
+.ai-title{
+    width: 100%; 
+    text-align: center;
+    font-size: 30px;
+    line-height: 80px;
+    color: white;
+}
+.ai-tips{
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    /* line-height: 6px; */
+}
+.ai-button{
+    
+    text-align: center;
+    height: 50px;
+}
+
+.upload-demo{
+    display: inline-block;
+}
+
+
+.pbutton{
+    /* display: inline; */
+    /* float: left; */
+    margin-right: 17%;
+    
+}
+.dbutton{
+    display: inline-block;
+    /* display: inline; */
+    margin-left: 17%;
+
+}
+.ai-window{
+    /* position: relative; */
+    background-color: rgba(119,119, 119, 0.8);;
+    
+    width: 100%;
+    height: 600px;
+    border: 1px solid #777;
+    margin-top: 30px;
+}
+.main-left{
+    /* position:absolute; */
+    width: 100%;
+
+    height: 100%;
+    /* border: 1px solid #777; */
+    overflow:auto;
+    
+}
+#eltag{
+    text-align: left;
+}
+/* .el-tag{
+    line-height: 5px !important;
+} */
+.main-right{
+    /* position:absolute; */
+    border-left:1px solid #777;
+    width: 190px;
+    right: 0;
+    height: 100%;
+}
+
+/* .resultlabel:{
+
+} */
